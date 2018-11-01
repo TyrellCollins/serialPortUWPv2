@@ -6,20 +6,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Page_Loaded">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="0,10,0,10" Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="0,10,10,0">
+        <StackPanel Orientation="Vertical" Margin="0,10,0,0" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Button x:Name="ButtonConnectToDevice" Content="Connect to device"
-                    Margin="0,0,10,0" Click = "ButtonConnectToDevice_Click"/>
+                    Margin="10,10,0,0" Click = "ButtonConnectToDevice_Click"/>
                 <Button x:Name="ButtonWrite" Content="Write" Margin="10,10,0,0" Click="ButtonWrite_Click"/>
             </StackPanel>
             <TextBlock Text="Select a Serial Device:"/>
-            <ListBox x:Name="ListSerialDevice" Height="100">
+            <ListBox x:Name="lstSerialDevices" Height="100">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding ID}"/>
+                        <TextBlock Text="{Binding Id}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
