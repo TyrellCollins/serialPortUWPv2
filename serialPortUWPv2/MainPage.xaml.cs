@@ -28,16 +28,18 @@ namespace serialPortUWPv2
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private ObservableCollection<DeviceInformation> ListOfDevices; 
         private SerialDevice serialPort = null;
 
         DataWriter dataWriterObject = null;
         DataReader dataReaderObject = null;
 
-        private ObservableCollection<DeviceInformation> ListOfDevices;
+        string received = "";
 
         private CancellationTokenSource ReadCancellationTokenSource;
+        
 
-        string received = "";
+        
 
         public MainPage()
         {
@@ -166,15 +168,36 @@ namespace serialPortUWPv2
                             {
                                 txtReceived.Text = received + txtReceived.Text;
                                 //parse code
+                                for (int i = 3; i < 38; i++)
+                                {
+                                    calChkSum += (byte)received[i];
+                                }
+
+                                
+
                                 txtPacketNum.Text = received.Substring(3, 3);
-                                txtAN0.Text = received.Substring(6, 4);
-                                txtAN1.Text = received.Substring(10, 4);
-                                txtAN2.Text = received.Substring(14, 4);
-                                txtAN3.Text = received.Substring(18, 4);
-                                txtAN4.Text = received.Substring(22, 4);
+                                
+                                int AN0 = Convert.ToInt32(received.Substring(6, 4));
+                                int AN1 = Convert.ToInt32(received.Substring(10, 4));
+                                int AN2 = Convert.ToInt32(received.Substring(14, 4));
+                                int AN3 = Convert.ToInt32(received.Substring(18, 4));
+                                int AN4 = Convert.ToInt32(received.Substring(22, 4));
+
+                                txtAN0.Text = Convert.ToString(AN0);
+                                txtAN1.Text = Convert.ToString(AN1);
+                                txtAN2.Text = Convert.ToString(AN2);
+                                txtAN3.Text = Convert.ToString(AN3);
+                                txtAN4.Text = Convert.ToString(AN4);
                                 txtAN5.Text = received.Substring(26, 4);
+
                                 txtBinOut.Text = received.Substring(30, 8);
+
+                                calChkSum = Convert.ToInt32(received.Substring(38, 3));
                                 txtChkSum.Text = received.Substring(38, 3);
+
+
+                                
+                                
 
                                 for (int i = 3; i < 38; i++)
                                 {
@@ -221,15 +244,18 @@ namespace serialPortUWPv2
         {
             var dataPacket = value;
 
-            Task<UInt32> storeAsyncTask;
+            Task<UInt32> storeTask;
 
             if (dataPacket.Length != 0)
             {
                 dataWriterObject.WriteString(dataPacket);
 
-                storeAsyncTask = dataWriterObject.StoreAsync().AsTask();
+                storeTask = dataWriterObject.StoreAsync().AsTask();
 
-                UInt32 bytesWritten = await storeAsyncTask;
+                UInt32 bytesWritten = await storeTask;
+
+                //UInt32 bytesWritten = await storeAsyncTask;
+                //a marker to note async removal for testing
                 if (bytesWritten > 0)
                 {
                     txtMessage.Text = "Valye sent correcly";
@@ -246,5 +272,17 @@ namespace serialPortUWPv2
         {
 
         }
+
+        private void Disconnect_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RefreshPort_Click(object sender, RoutedEventArgs e)
+        {
+            ListAvailablePorts();                                           //On Refresh; reload Ports
+        }
+
+
     }
 }

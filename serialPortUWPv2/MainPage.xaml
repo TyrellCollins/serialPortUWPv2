@@ -14,7 +14,6 @@
                 <Button x:Name="ButtonConnectToDevice" Content="Connect to device"
                     Margin="0,0,10,0" Click = "ButtonConnectToDevice_Click"/>
                 <Button x:Name="ButtonWrite" Content="Write" Margin="10,10,0,0" Click="ButtonWrite_Click"/>
-
             </StackPanel>
             <TextBlock Text="Select a Serial Device:"/>
             <ListBox x:Name="ListSerialDevice" Height="100">
