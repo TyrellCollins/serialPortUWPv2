@@ -29,6 +29,7 @@ namespace serialPortUWPv2
     public sealed partial class MainPage : Page
     {
         private SerialDevice serialPort = null;
+        private SolarCalc solarCalc = new SolarCalc();
 
         DataWriter dataWriterObject = null;
         DataReader dataReaderObject = null;
@@ -38,12 +39,7 @@ namespace serialPortUWPv2
         private CancellationTokenSource ReadCancellationTokenSource;
 
 
-
         string received = "";
-
-
-
-
 
 
         public MainPage()
@@ -150,6 +146,9 @@ namespace serialPortUWPv2
             Task<UInt32> loadAsyncTask;
 
             int calChkSum = 0;
+            int recChkSum = 0;
+            int an0, an1, an2, an3, an4, an5;
+
 
             uint ReadBufferLength = 1;
 
@@ -175,16 +174,8 @@ namespace serialPortUWPv2
                             if (received.Length > 42)
                             {
                                 txtReceived.Text = received + txtReceived.Text;
-
+                                //parse code
                                 txtPacketNum.Text = received.Substring(3, 3);
-                                /* 
-                                 int AN0 = Convert.ToInt32(received.Substring(6, 4));
-                                 int AN1 = Convert.ToInt32(received.Substring(10, 4));
-                                 int AN2 = Convert.ToInt32(received.Substring(14, 4));
-                                 int AN3 = Convert.ToInt32(received.Substring(18, 4));
-                                 int AN4 = Convert.ToInt32(received.Substring(22, 4));
-                                 */
-
                                 txtAN0.Text = received.Substring(6, 4);
                                 txtAN1.Text = received.Substring(10, 4);
                                 txtAN2.Text = received.Substring(14, 4);
@@ -199,9 +190,27 @@ namespace serialPortUWPv2
                                     calChkSum += (byte)received[i];
                                 }
                                 txtCalChkSum.Text = Convert.ToString(calChkSum);
+                                an0 = Convert.ToInt32(received.Substring(6, 4));
+                                an1 = Convert.ToInt32(received.Substring(10, 4));
+                                an2 = Convert.ToInt32(received.Substring(14, 4));
+                                an3 = Convert.ToInt32(received.Substring(18, 4));
+                                an4 = Convert.ToInt32(received.Substring(22, 4));
+                                an5 = Convert.ToInt32(received.Substring(26, 4));
+
+                                recChkSum = Convert.ToInt32(received.Substring(38, 3));
+                                calChkSum %= 1000;
+                                if(recChkSum==calChkSum)
+                                {
+                                    txtSolarVolt.Text = solarCalc.GetSolarVoltage(an0);
+                                    txtBatteryVolt.Text = solarCalc.GetBatteryVoltage(an2);
+                                    txtBatteryCurrent.Text = solarCalc.GetBatteryCurrent(an1, an2);
+                                    txtLED1current.Text = solarCalc.GetLEDcurrent(an4, an1);
+                                    txtLED2current.Text = solarCalc.GetLEDcurrent(an3, an1);
+
+                                }
+
+
                                 received = "";
-
-
                             }
 
                         }
