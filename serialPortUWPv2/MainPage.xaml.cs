@@ -278,21 +278,3 @@ namespace serialPortUWPv2
 }
 
        
-        /*
-       private void Page_Loaded(object sender, RoutedEventArgs e)
-       {
-
-       }
-
-       private void Disconnect_Click(object sender, RoutedEventArgs e)
-       {
-
-       }
-
-       private void RefreshPort_Click(object sender, RoutedEventArgs e)
-       {
-           lstAvailablePorts();                                           //On Refresh; reload Ports
-       }
-       */
-
- 

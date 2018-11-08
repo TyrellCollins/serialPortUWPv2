@@ -11,19 +11,12 @@ namespace serialPortUWPv2
         //Field
         private static int ResistorValue;
         private static double Vref;
-        private static double Aref;
-
-
-       // private NumberFormatInfo provider = new NumberFormatInfo();
-
-
 
         //Constructor that takes no arguements
         public SolarCalc()
         {
             ResistorValue = 100;
-            Vref = 4.73; //Voltage Reference 4.73 
-            Aref = 1024.0; //Analog Reference, 1024 steps
+            Vref = 4.73; //Voltage Reference 4.73          
         }
 
 
