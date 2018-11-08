@@ -16,7 +16,9 @@ namespace serialPortUWPv2
         public SolarCalc()
         {
             ResistorValue = 100;
-            Vref = 4.73; //Voltage Reference 4.73          
+            Vref = 5.03; //Voltage Reference 
+            //ohms law
+            //5.03V/100 ohm = 50.3 mA
         }
 
 
@@ -24,7 +26,7 @@ namespace serialPortUWPv2
 
         public string GetSolarVoltage(int an0)
         {
-            double dAn0 = an0 * Vref / 1024.0;  // Vref = 3.3  3.3v zener
+            double dAn0 = an0 * Vref / 1024.0;  // Vref = 5.03
             return dAn0.ToString("0.0000");
 
         }
@@ -39,7 +41,7 @@ namespace serialPortUWPv2
         {
             int ShuntAnalog = an1 - an2;
             double ShuntVoltage = ShuntAnalog * Vref / 1024.0;
-            double dBatCurrent = ShuntAnalog / ResistorValue;
+            double dBatCurrent = ShuntVoltage / ResistorValue;
             return dBatCurrent.ToString("0.000000");
 
         }

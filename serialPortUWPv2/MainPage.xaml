@@ -52,7 +52,7 @@
                            Margin="10,10,0,0"/>
                 <TextBlock x:Name="txtBatteryCurrentTitle" Text="I Bat" 
                            Margin="40,10,0,0"/>
-                <TextBlock x:Name="txtBatteryCurrent" Text="I Bat" 
+                <TextBlock x:Name="txtBatteryCurrent" Text="I Bat mA" 
                            Margin="10,10,0,0"/>
                 <TextBlock x:Name="txtLED1currentTitle" Text="I LED1" 
                            Margin="40,10,0,0"/>
