@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="finalGUI.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:finalGUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Frame HorizontalAlignment="Left" VerticalAlignment="Top" Height="310" Width="960" Navigated="Frame_Navigated" Margin="315,145,0,0">
+            <TextBox x:Name="Seconds" HorizontalAlignment="Left" Margin="277,200,0,0" Text="Seconds" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" TextChanged="Seconds_TextChanged"/>
+
+        </Frame>
+        <TextBlock HorizontalAlignment="Left" Height="40" Margin="625,284,0,0" Text="Enter date below." TextWrapping="Wrap" VerticalAlignment="Top" Width="295"/>
+        <TextBox x:Name="Minutes" HorizontalAlignment="Left" Margin="671,344,0,0" Text="Minutes
+                 " VerticalAlignment="Top" Width="80" HorizontalContentAlignment="Stretch"/>
+        <TextBox x:Name="Hours" HorizontalAlignment="Left" Margin="754,344,0,0" Text="Hours" VerticalAlignment="Top" HorizontalContentAlignment="Stretch"/>
+        <ToggleButton x:Name="AmPm" Content="ampmStatus" HorizontalAlignment="Left" Margin="825,344,0,0" VerticalAlignment="Top" Checked="ToggleButton_Checked" HorizontalContentAlignment="Stretch"/>
+
+    </Grid>
+</Page>
